@@ -12,7 +12,7 @@ import Button from "../Button";
 import { FcGoogle } from "react-icons/fc";
 import useLoginModal from "@/app/hooks/useLoginModal";
 
-const RegisterModal = () => {
+const LoginModal = () => {
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const [isLoading, setIsLoading] = useState(false);
@@ -24,8 +24,6 @@ const RegisterModal = () => {
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
-      firstName: "",
-      lastName: "",
       email: "",
       password: "",
     },
@@ -33,44 +31,12 @@ const RegisterModal = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
-
-    axios
-      .post("/api/register", data)
-      .then(() => {
-        registerModal.onClose;
-      })
-      .catch((error) => {
-        toast.error("Something went wrong");
-        console.log(error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
   };
 
-  const bodyRegister = (
+  const bodyLogin = (
     <div className="flex flex-col gap-5 w-full">
-      <div className="text-lg font-light">
-        We need a few more details to create your account
-      </div>
+      <div className="text-lg font-light">Welcome back</div>
       <div className="flex flex-col gap-2">
-        <div className="text-md font-semibold">Your name and email</div>
-        <Input
-          id="firstName"
-          label="First name"
-          disabled={isLoading}
-          register={register}
-          errors={errors}
-          required
-        />
-        <Input
-          id="lastName"
-          label="Last name"
-          disabled={isLoading}
-          register={register}
-          errors={errors}
-          required
-        />
         <Input
           id="email"
           label="Email"
@@ -81,7 +47,6 @@ const RegisterModal = () => {
         />
       </div>
       <div className="flex flex-col gap-2">
-        <div className="text-md font-semibold">Create a password</div>
         <Input
           id="password"
           label="Password"
@@ -95,7 +60,7 @@ const RegisterModal = () => {
     </div>
   );
 
-  const footerRegister = (
+  const footerLogin = (
     <>
       <div className="flex flex-col gap-3">
         <hr />
@@ -106,15 +71,15 @@ const RegisterModal = () => {
           icon={FcGoogle}
         />
         <div className="text-sm font-light text-neutral-500  pl-1 flex flex-row gap-2">
-          <div>Already have an account?</div>
+          <div>New to Bali Haven?</div>
           <div
             className="text-neutral-800 cursor-pointer hover:underline"
             onClick={() => {
-              registerModal.onClose();
-              loginModal.onOpen();
+              loginModal.onClose();
+              registerModal.onOpen();
             }}
           >
-            Sign in
+            Create an account
           </div>
         </div>
       </div>
@@ -122,19 +87,17 @@ const RegisterModal = () => {
   );
 
   return (
-    <>
-      <Modal
-        title={"Register"}
-        disabled={isLoading}
-        isOpen={registerModal.isOpen}
-        onClose={registerModal.onClose}
-        onSubmit={handleSubmit(onSubmit)}
-        actionLabel="Create My Account"
-        body={bodyRegister}
-        footer={footerRegister}
-      />
-    </>
+    <Modal
+      title={"Sign In"}
+      disabled={isLoading}
+      isOpen={loginModal.isOpen}
+      onClose={loginModal.onClose}
+      onSubmit={handleSubmit(onSubmit)}
+      actionLabel="Sign in"
+      body={bodyLogin}
+      footer={footerLogin}
+    />
   );
 };
 
-export default RegisterModal;
+export default LoginModal;
