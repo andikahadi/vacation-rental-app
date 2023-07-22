@@ -3,6 +3,7 @@
 import { IoMdClose } from "react-icons/io";
 import Button from "../Button";
 import { FcGoogle } from "react-icons/fc";
+import { useEffect, useState } from "react";
 
 interface ModalProps {
   isOpen?: boolean;
@@ -29,6 +30,35 @@ const Modal: React.FC<ModalProps> = ({
   secondaryAction,
   secondaryActionLabel,
 }) => {
+  const [showModal, setShowModal] = useState(isOpen);
+
+  useEffect(() => {
+    setShowModal(isOpen);
+  }, [isOpen]);
+
+  const handleClose = () => {
+    if (disabled) {
+      return null;
+    }
+
+    setShowModal(false);
+    setTimeout(() => {
+      onClose();
+    }, 300);
+  };
+
+  const handleSubmit = () => {
+    if (disabled) {
+      return null;
+    }
+
+    onSubmit();
+  };
+
+  if (!isOpen) {
+    return null;
+  }
+
   return (
     <div
       className="
@@ -58,11 +88,13 @@ const Modal: React.FC<ModalProps> = ({
       >
         {/*Content*/}
         <div
-          className="
+          className={`
             h-full
             translate
             duration-300
-          "
+            ${showModal ? "translate-y-0" : "translate-y-full"}
+            ${showModal ? "opacity-100" : "opacity-0"}
+          `}
         >
           <div
             className="
@@ -77,6 +109,7 @@ const Modal: React.FC<ModalProps> = ({
             <div className=" flex flex-row items-center justify-start">
               <div className="font-semibold text-2xl">Sign In</div>
               <button
+                onClick={handleClose}
                 className="
                     p-1
                     border-0
@@ -97,13 +130,13 @@ const Modal: React.FC<ModalProps> = ({
               <div className="flex flex-row">
                 {secondaryAction && secondaryActionLabel && (
                   <Button
-                    onClick={onSubmit}
+                    onClick={handleSubmit}
                     disabled={disabled}
                     label={secondaryActionLabel}
                   />
                 )}
                 <Button
-                  onClick={onSubmit}
+                  onClick={handleSubmit}
                   disabled={disabled}
                   label={actionLabel}
                 />
