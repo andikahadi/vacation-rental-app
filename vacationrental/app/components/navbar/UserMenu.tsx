@@ -1,13 +1,18 @@
+"use client ";
+
+import useRegisterModal from "@/app/hooks/useRegisterModal";
 import { CiMenuFries } from "react-icons/ci";
 import Avatar from "./Avatar";
 
 const UserMenu = () => {
+  const registerModal = useRegisterModal();
   return (
     <div className="flex flex-row items-center justify-center gap-4">
       <div className="py-2 px-4 rounded-full hover:bg-neutral-100 transition">
         Rent your home
       </div>
       <div
+        onClick={() => registerModal.onOpen()}
         className="
           flex 
           flex-row 

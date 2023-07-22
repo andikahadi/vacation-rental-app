@@ -1,8 +1,9 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter, Nunito, Roboto } from "next/font/google";
+import { Inter, Nunito } from "next/font/google";
 import Navbar from "./components/navbar/Navbar";
-import Modal from "./components/modal/Modal";
+import RegisterModal from "./components/modal/RegisterModal";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 const nunito = Nunito({ subsets: ["latin"] });
@@ -20,7 +21,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={nunito.className}>
-        <Modal isOpen={true} actionLabel="Submit" />
+        <Toaster />
+        <RegisterModal />
         <Navbar />
         {children}
       </body>

@@ -44,7 +44,7 @@ const Modal: React.FC<ModalProps> = ({
     setShowModal(false);
     setTimeout(() => {
       onClose();
-    }, 300);
+    }, 200);
   };
 
   const handleSubmit = () => {
@@ -77,22 +77,22 @@ const Modal: React.FC<ModalProps> = ({
           w-full
           md:w-[500px]
           h-full
-          md:h-[700px]
-          bg-white
-          rounded-none
-          md:rounded-3xl
-          px-14
-          py-11
-          relative
+          md:h-auto
         "
       >
         {/*Content*/}
         <div
           className={`
+            relative
+            bg-white
+            rounded-none
+            md:rounded-3xl
+            px-14
+            py-11
             h-full
             translate
-            duration-300
-            ${showModal ? "translate-y-0" : "translate-y-full"}
+            duration-200
+            ${showModal ? "translate-y-0" : "translate-y-1/3"}
             ${showModal ? "opacity-100" : "opacity-0"}
           `}
         >
@@ -102,12 +102,12 @@ const Modal: React.FC<ModalProps> = ({
               flex-col 
               w-full
               h-full
-              gap-3
+              gap-5    
             "
           >
             {/* Header */}
             <div className=" flex flex-row items-center justify-start">
-              <div className="font-semibold text-2xl">Sign In</div>
+              <div className="font-semibold text-2xl">{title}</div>
               <button
                 onClick={handleClose}
                 className="

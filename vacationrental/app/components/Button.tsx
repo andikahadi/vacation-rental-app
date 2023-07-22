@@ -27,7 +27,7 @@ const Button: React.FC<ButtonProps> = ({
         w-full
         py-4
         px-14
-        text-md
+        text-sm
         border-[1px]
         ${outline ? "bg-white" : "bg-yellow-400"}
         ${outline ? "border-black" : "border-yellow-400"}
