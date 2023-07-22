@@ -9,7 +9,7 @@ const UserMenu = () => {
   return (
     <div className="flex flex-row items-center justify-center gap-4">
       <div className="py-2 px-4 rounded-full hover:bg-neutral-100 transition">
-        Rent your home
+        Become a host
       </div>
       <div
         onClick={() => registerModal.onOpen()}

@@ -8,6 +8,8 @@ import useRegisterModal from "@/app/hooks/useRegisterModal";
 import Modal from "./Modal";
 import Input from "../inputs/Input";
 import toast from "react-hot-toast";
+import Button from "../Button";
+import { FcGoogle } from "react-icons/fc";
 
 const RegisterModal = () => {
   const registerModal = useRegisterModal();
@@ -45,7 +47,7 @@ const RegisterModal = () => {
   };
 
   const bodyRegister = (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5 w-full">
       <div className="text-lg font-light">
         We need a few more details to create your account
       </div>
@@ -83,6 +85,26 @@ const RegisterModal = () => {
     </div>
   );
 
+  const footerRegister = (
+    <>
+      <div className="flex flex-col gap-3">
+        <hr />
+        <Button
+          outline
+          label="Continue with Google"
+          onClick={() => {}}
+          icon={FcGoogle}
+        />
+        <div className="text-sm font-light text-neutral-500  pl-1 flex flex-row gap-2">
+          <div>Already have an account?</div>
+          <div className="text-neutral-800 cursor-pointer hover:underline">
+            Sign in
+          </div>
+        </div>
+      </div>
+    </>
+  );
+
   return (
     <>
       <Modal
@@ -93,6 +115,7 @@ const RegisterModal = () => {
         onSubmit={handleSubmit(onSubmit)}
         actionLabel="Create My Account"
         body={bodyRegister}
+        footer={footerRegister}
       />
     </>
   );

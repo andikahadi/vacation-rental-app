@@ -29,8 +29,10 @@ const Button: React.FC<ButtonProps> = ({
         px-14
         text-sm
         border-[1px]
+        transition
         ${outline ? "bg-white" : "bg-yellow-400"}
-        ${outline ? "border-black" : "border-yellow-400"}
+        ${outline ? "border-neutral-400" : "border-none"}
+        ${outline ? "hover:border-neutral-600" : "hover:bg-yellow-300"}
         ${outline ? "text-left" : "text-center"}
         ${outline ? "normal-case" : "uppercase"}
       `}
