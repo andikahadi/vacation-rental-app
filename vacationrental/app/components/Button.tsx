@@ -8,6 +8,7 @@ interface ButtonProps {
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
   outline?: boolean;
+  small?: boolean;
   icon?: IconType;
 }
 
@@ -16,6 +17,7 @@ const Button: React.FC<ButtonProps> = ({
   onClick,
   disabled,
   outline,
+  small,
   icon: Icon,
 }) => {
   return (
@@ -25,9 +27,6 @@ const Button: React.FC<ButtonProps> = ({
       className={`
         relative
         w-full
-        py-4
-        px-14
-        text-sm
         border-[1px]
         transition
         ${outline ? "bg-white" : "bg-yellow-400"}
@@ -35,6 +34,12 @@ const Button: React.FC<ButtonProps> = ({
         ${outline ? "hover:border-neutral-600" : "hover:bg-yellow-300"}
         ${outline ? "text-left" : "text-center"}
         ${outline ? "normal-case" : "uppercase"}
+        ${small ? "py-3" : "py-4"}
+        ${small ? "rounded-3xl" : "rounded-none"}
+        ${small ? "w-[150px]" : "w-full"}
+        ${small ? "text-sm" : "text-md"}
+        ${small ? "mx-auto" : "px-14"}
+        ${small ? "font-light" : "font-semibold"}
       `}
     >
       {Icon && (
@@ -44,7 +49,7 @@ const Button: React.FC<ButtonProps> = ({
             className="
             absolute
             left-4
-            top-4
+            top-3
           "
           />
           <LiaLongArrowAltRightSolid
@@ -52,7 +57,7 @@ const Button: React.FC<ButtonProps> = ({
             className="
               absolute
               right-4
-              top-4
+              top-3
             "
           />
         </>

@@ -1,18 +1,31 @@
 "use client ";
 
-import useRegisterModal from "@/app/hooks/useRegisterModal";
+import useLoginModal from "@/app/hooks/useLoginModal";
+import useUserSidebar from "@/app/hooks/useUserSidebar";
+import { User } from "@prisma/client";
 import { CiMenuFries } from "react-icons/ci";
 import Avatar from "./Avatar";
 
-const UserMenu = () => {
-  const registerModal = useRegisterModal();
+interface UserMenuProps {
+  currentUser?: User | null;
+}
+
+const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
+  const loginModal = useLoginModal();
+  const userSidebar = useUserSidebar();
   return (
     <div className="flex flex-row items-center justify-center gap-4">
       <div className="py-2 px-4 rounded-full hover:bg-neutral-100 transition">
         Become a host
       </div>
       <div
-        onClick={() => registerModal.onOpen()}
+        onClick={() => {
+          if (!currentUser) {
+            loginModal.onOpen();
+          } else {
+            userSidebar.onOpen();
+          }
+        }}
         className="
           flex 
           flex-row 
@@ -26,7 +39,7 @@ const UserMenu = () => {
           transition"
       >
         <CiMenuFries size={30} />
-        <Avatar />
+        <Avatar currentUser={currentUser} />
       </div>
     </div>
   );
