@@ -8,6 +8,7 @@ import LoginModal from "./components/modal/LoginModal";
 import getCurrentUser from "./actions/getCurrentUser";
 import UserSidebar from "./components/sidebar/UserSidebar";
 import FiltersModal from "./components/modal/FiltersModal";
+import RentModal from "./components/modal/RentModal";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -29,6 +30,7 @@ export default async function RootLayout({
         <RegisterModal />
         <LoginModal />
         <FiltersModal />
+        <RentModal />
         <UserSidebar />
         <Navbar currentUser={currentUser} />
         {children}

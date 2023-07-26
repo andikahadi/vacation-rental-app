@@ -127,10 +127,10 @@ const Modal: React.FC<ModalProps> = ({
             <div className="flex">{body}</div>
             {/* Footer */}
             <div className="flex flex-col gap-3">
-              <div className="flex flex-row">
+              <div className="flex flex-row gap-3">
                 {secondaryAction && secondaryActionLabel && (
                   <Button
-                    onClick={handleSubmit}
+                    onClick={secondaryAction}
                     disabled={disabled}
                     label={secondaryActionLabel}
                   />

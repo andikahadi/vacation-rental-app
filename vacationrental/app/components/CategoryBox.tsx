@@ -1,6 +1,4 @@
-import { useRouter, useSearchParams } from "next/navigation";
 import { IconType } from "react-icons";
-import qs from "query-string";
 
 interface CategoryBoxProps {
   label: string;
@@ -15,34 +13,6 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
   selected = false,
   onClick,
 }) => {
-  const router = useRouter();
-  const params = useSearchParams();
-
-  // const handleClick = () => {
-  //   let currentQuery = {};
-
-  //   if (params) {
-  //     currentQuery = qs.parse(params.toString());
-  //   }
-
-  //   const updatedQuery: any = {
-  //     ...currentQuery,
-  //     locationCategory: label,
-  //   };
-
-  //   if (params?.get("locationCategory") == label) {
-  //     delete updatedQuery.locationCategory;
-  //   }
-
-  //   const url = qs.stringifyUrl(
-  //     {
-  //       url: "/",
-  //       query: updatedQuery,
-  //     },
-  //     { skipNull: true }
-  //   );
-  // };
-
   return (
     <div
       onClick={() => onClick(label)}

@@ -1,6 +1,7 @@
 "use client ";
 
 import useLoginModal from "@/app/hooks/useLoginModal";
+import useRentModal from "@/app/hooks/useRentModal";
 import useUserSidebar from "@/app/hooks/useUserSidebar";
 import { User } from "@prisma/client";
 import { CiMenuFries } from "react-icons/ci";
@@ -12,10 +13,24 @@ interface UserMenuProps {
 
 const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const loginModal = useLoginModal();
+  const rentModal = useRentModal();
   const userSidebar = useUserSidebar();
+
+  const onRent = () => {
+    if (!currentUser) {
+      return loginModal.onOpen();
+    }
+
+    rentModal.onOpen();
+    // Open rent modal
+  };
+
   return (
     <div className="flex flex-row items-center justify-center gap-4">
-      <div className="py-2 px-4 rounded-full hover:bg-neutral-100 transition">
+      <div
+        onClick={onRent}
+        className="py-2 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
+      >
         Become a host
       </div>
       <div
