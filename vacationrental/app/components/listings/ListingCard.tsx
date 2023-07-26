@@ -69,7 +69,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
               <span className="block w-12 h-[1px] bg-neutral-200 my-1"></span>
             </div>
             <div className="">
-              <FavoriteButton listingId={data.id} />
+              <FavoriteButton listingId={data.id} hasFavorited={true} />
             </div>
           </div>
 

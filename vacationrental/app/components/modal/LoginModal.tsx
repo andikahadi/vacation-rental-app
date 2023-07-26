@@ -13,6 +13,7 @@ import Button from "../Button";
 import { FcGoogle } from "react-icons/fc";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import { useRouter } from "next/navigation";
+import { AiFillGithub } from "react-icons/ai";
 
 const LoginModal = () => {
   const router = useRouter();
@@ -84,8 +85,14 @@ const LoginModal = () => {
         <Button
           outline
           label="Continue with Google"
-          onClick={() => {}}
+          onClick={() => signIn("google")}
           icon={FcGoogle}
+        />
+        <Button
+          outline
+          label="Continue with Github"
+          onClick={() => signIn("github")}
+          icon={AiFillGithub}
         />
         <div className="text-sm font-light text-neutral-500  pl-1 flex flex-row gap-2">
           <div>New to Bali Haven?</div>

@@ -6,11 +6,9 @@ import RegisterModal from "./components/modal/RegisterModal";
 import { Toaster } from "react-hot-toast";
 import LoginModal from "./components/modal/LoginModal";
 import getCurrentUser from "./actions/getCurrentUser";
-import { User } from "@prisma/client";
-import Sidebar from "./components/sidebar/Sidebar";
 import UserSidebar from "./components/sidebar/UserSidebar";
+import FiltersModal from "./components/modal/FiltersModal";
 
-const inter = Inter({ subsets: ["latin"] });
 const nunito = Nunito({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -30,6 +28,7 @@ export default async function RootLayout({
         <Toaster />
         <RegisterModal />
         <LoginModal />
+        <FiltersModal />
         <UserSidebar />
         <Navbar currentUser={currentUser} />
         {children}

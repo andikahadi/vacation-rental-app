@@ -39,7 +39,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
           transition"
       >
         <CiMenuFries size={30} />
-        <Avatar currentUser={currentUser} />
+        <Avatar src={currentUser?.image} />
       </div>
     </div>
   );

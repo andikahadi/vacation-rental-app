@@ -3,29 +3,28 @@ import { User } from "@prisma/client";
 import Image from "next/image";
 
 interface AvatarProps {
-  currentUser?: User | null;
+  src: string | null | undefined;
 }
 
-const Avatar: React.FC<AvatarProps> = ({ currentUser }) => {
+const Avatar: React.FC<AvatarProps> = ({ src }) => {
   return (
     <div
       className="
       h-[30px] w-[30px] border rounded-full overflow-hidden flex items-center justify-center
     "
     >
-      {!currentUser?.firstName && (
-        <Image
-          height="30"
-          width="30"
-          alt="avatar"
-          src="/images/placeholder.jpg"
-        />
-      )}
-      {currentUser?.firstName && (
+      <Image
+        height="30"
+        width="30"
+        alt="avatar"
+        src={src || "/images/placeholder.jpg"}
+      />
+
+      {/* {currentUser?.image && currentUser?.firstName && (
         <div className="font-semibold text-lg capitalize">
-          {currentUser.firstName[0]}
+          <Image height="30" width="30" alt="avatar" src={currentUser.image} />
         </div>
-      )}
+      )} */}
     </div>
   );
 };

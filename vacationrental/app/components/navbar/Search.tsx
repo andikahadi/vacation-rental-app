@@ -16,7 +16,7 @@ const Search = () => {
         <div
           className="
             text-sm
-            text-gray-400
+            font-light
             py-3
             px-4
             w-full
@@ -28,8 +28,8 @@ const Search = () => {
         <div
           className="
             text-sm
-            text-gray-400
-            py-4
+            font-light
+            py-3
             px-4
             w-full
             border-x-[0px]
@@ -42,7 +42,7 @@ const Search = () => {
         <div
           className="
             text-sm
-            text-gray-400
+            font-light
             pl-4
             pr-2
             w-full

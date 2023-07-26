@@ -2,6 +2,7 @@
 
 import { User } from "@prisma/client";
 import Container from "../Container";
+import Filters from "./Filters";
 import Logo from "./Logo";
 import Search from "./Search";
 import UserMenu from "./UserMenu";
@@ -23,8 +24,9 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
       </div>
       <div className="pt-5 bg-yellow-400 h-10">
         <Container>
-          <div className="flex flex-row items-center">
+          <div className="flex flex-row items-center gap-4">
             <Search />
+            <Filters />
           </div>
         </Container>
       </div>
