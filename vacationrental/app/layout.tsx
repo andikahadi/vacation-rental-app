@@ -33,7 +33,7 @@ export default async function RootLayout({
         <RentModal />
         <UserSidebar />
         <Navbar currentUser={currentUser} />
-        {children}
+        <div className="pt-[7.5rem]">{children}</div>
       </body>
     </html>
   );

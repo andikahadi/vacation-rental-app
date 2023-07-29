@@ -87,7 +87,23 @@ const RentModal = () => {
       return onNext();
     }
 
-    // run axios post
+    setIsLoading(true);
+
+    axios
+      .post("api/listings", data)
+      .then(() => {
+        toast.success("Listing Created!");
+        router.refresh();
+        reset(); // reset react form
+        setStep(STEPS.CATEGORY);
+        rentModal.onClose();
+      })
+      .catch(() => {
+        toast.error("Something went wrong");
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const actionLabel = useMemo(() => {

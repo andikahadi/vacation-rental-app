@@ -3,14 +3,22 @@
 import Button from "../Button";
 import Image from "next/image";
 import FavoriteButton from "../FavoriteButton";
+import { Listing, Reservation, User } from "@prisma/client";
+import { useRouter } from "next/navigation";
 
 interface ListingCardProps {
-  data: any;
+  data: Listing;
+  currentUser?: User | null;
+  reservation?: Reservation;
+  onAction?: (id: string) => void;
+  actionLabel: string;
 }
 
-const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
+const ListingCard: React.FC<ListingCardProps> = ({ data, currentUser }) => {
+  const router = useRouter();
   return (
     <div
+      onClick={() => router.push(`/listings/${data.id}`)}
       className="
         px-4
         lg:px-8
@@ -69,7 +77,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ data }) => {
               <span className="block w-12 h-[1px] bg-neutral-200 my-1"></span>
             </div>
             <div className="">
-              <FavoriteButton listingId={data.id} hasFavorited={true} />
+              <FavoriteButton listingId={data.id} currentUser={currentUser} />
             </div>
           </div>
 

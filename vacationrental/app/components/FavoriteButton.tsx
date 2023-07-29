@@ -2,18 +2,24 @@
 
 import { MdOutlineBookmarkAdd } from "react-icons/md";
 import { CiBookmarkCheck, CiBookmarkPlus } from "react-icons/ci";
+import useFavorite from "../hooks/useFavorite";
+import { User } from "@prisma/client";
 interface FavoriteButtonProps {
   listingId: string;
-  hasFavorited: boolean;
+  currentUser?: User | null;
 }
 
 const FavoriteButton: React.FC<FavoriteButtonProps> = ({
   listingId,
-  hasFavorited = true,
+  currentUser,
 }) => {
+  const { hasFavorited, toggleFavorite } = useFavorite({
+    listingId,
+    currentUser,
+  });
   return (
     <div
-      onClick={() => {}}
+      onClick={toggleFavorite}
       className={`
           h-12
           w-12
