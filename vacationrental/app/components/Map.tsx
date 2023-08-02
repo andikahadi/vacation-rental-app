@@ -18,15 +18,20 @@ L.Icon.Default.mergeOptions({
 
 interface MapProps {
   center?: number[];
+  large?: boolean;
 }
 
-const Map: React.FC<MapProps> = ({ center }) => {
+const Map: React.FC<MapProps> = ({ large, center }) => {
   return (
     <MapContainer
       center={(center as L.LatLngExpression) || [-8.4095, 115.1889]}
-      zoom={center ? 10 : 8}
+      zoom={center ? 12 : 9}
       scrollWheelZoom={false}
-      className="h-[35vh] rounded-lg"
+      className={`
+        ${large ? "rounded-none" : "rounded-lg"}
+        ${large ? "h-full" : "h-[35vh]"}
+       
+      `}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
