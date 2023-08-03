@@ -31,7 +31,10 @@ const UserSidebar = () => {
           label={"Trips"}
           onClick={() => router.push("/trips")}
         />
-        <UserSidebarItem label={"Host Reservation"} onClick={() => {}} />
+        <UserSidebarItem
+          label={"Host Reservation"}
+          onClick={() => router.push("/hostreservations")}
+        />
         <UserSidebarItem label={"Favorites"} onClick={() => {}} />
       </div>
     </div>

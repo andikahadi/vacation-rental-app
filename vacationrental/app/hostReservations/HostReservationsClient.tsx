@@ -8,12 +8,12 @@ import toast from "react-hot-toast";
 import Heading from "../components/Heading";
 import ListingCard from "../components/listings/ListingCard";
 
-interface TripsClientSideProps {
+interface HostReservationClientProps {
   reservations: Reservation[];
-  currentUser: User | null;
+  currentUser: User;
 }
 
-const TripsClientSide: React.FC<TripsClientSideProps> = ({
+const HostReservationClient: React.FC<HostReservationClientProps> = ({
   reservations,
   currentUser,
 }) => {
@@ -29,8 +29,8 @@ const TripsClientSide: React.FC<TripsClientSideProps> = ({
         toast.success("Reservation cancelled");
         router.refresh();
       })
-      .catch((error) => {
-        toast.error(error?.response?.data?.error);
+      .catch(() => {
+        toast.error("Something went wrong");
       })
       .finally(() => {
         setDeleteId("");
@@ -65,14 +65,16 @@ const TripsClientSide: React.FC<TripsClientSideProps> = ({
           flex-col       
         "
       >
-        <div className="px-4 lg:px-8 py-4">
-          <Heading
-            title="Trips"
-            subtitle="Where youve been and where youre going"
-          />
+        <div
+          className="
+          px-4
+          lg:px-8
+          py-4
+          "
+        >
+          <Heading title="Reservations" subtitle="Bookings on your property" />
         </div>
-
-        <>
+        <div>
           {reservations.map((reservation: any) => {
             return (
               <ListingCard
@@ -82,12 +84,12 @@ const TripsClientSide: React.FC<TripsClientSideProps> = ({
                 actionId={reservation.id}
                 onAction={onCancel}
                 disabled={deleteId == reservation.id}
-                actionLabel="Cancel reservation"
+                actionLabel="Cancel client reservation"
                 currentUser={currentUser}
               />
             );
           })}
-        </>
+        </div>
       </div>
       <div
         className="
@@ -103,4 +105,4 @@ const TripsClientSide: React.FC<TripsClientSideProps> = ({
   );
 };
 
-export default TripsClientSide;
+export default HostReservationClient;

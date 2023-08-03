@@ -36,7 +36,6 @@ const FiltersModal = () => {
   const [locationCategory, setLocationCategory] = useState(
     params?.get("locationCategory")
   );
-  console.log(locationCategory);
 
   const handleSubmit = () => {
     let currentQuery = {};
