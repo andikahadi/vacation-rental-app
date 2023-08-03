@@ -37,7 +37,7 @@ const ListingInfo: React.FC<ListingInfoProps> = ({
   const location = getByName(locationValue);
   return (
     <div className="flex flex-col gap-6">
-      <div>{description}</div>
+      <div className="font-light text-neutral-600">{description}</div>
       <div className="flex flex-col gap-2">
         <div className="text-2xl font-semibold">About this stay</div>
         <hr />

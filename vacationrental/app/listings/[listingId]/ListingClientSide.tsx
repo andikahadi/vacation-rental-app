@@ -105,12 +105,28 @@ const ListingClientSide: React.FC<ListingClientSideProps> = ({
 
   return (
     <div className="w-screen">
-      <div className="flex flex-col gap-6 w-full aspect-video">
-        <div className="w-full h-full ">
-          <ListingImage imageSrc={listing.imageSrc} />
+      <div className="flex flex-col gap-6 w-full ">
+        <div
+          className="
+            px-0
+            xl:px-8
+            grid 
+            grid-cols-1 
+            xl:grid-cols-2 
+            grid-flow-row 
+            gap-2
+            w-full 
+            "
+        >
+          <div className="col-span-1">
+            <ListingImage imageSrc={listing.imageSrc} />
+          </div>
+          <div className="hidden xl:block col-span-1">
+            <ListingImage imageSrc={listing.imageSrc} />
+          </div>
         </div>
-        <div className="px-20 flex flex-row gap-14 ">
-          <div className="flex flex-col gap-6 w-3/5">
+        <div className="px-6 md:px-20 flex flex-row gap-14 ">
+          <div className="flex flex-col gap-6 w-full lg:w-3/5">
             <ListingHead
               title={listing.title}
               locationValue={listing.locationValue}
@@ -118,6 +134,19 @@ const ListingClientSide: React.FC<ListingClientSideProps> = ({
               bedroomCount={listing.roomCount}
               bathroomCount={listing.bathroomCount}
             />
+            <div className="block lg:hidden w-full">
+              <ListingReservation
+                price={listing.price}
+                totalPrice={totalPrice}
+                onChangeDate={(value) => setDateRange(value)}
+                dateRange={dateRange}
+                onSubmit={onNewReservation}
+                disabled={isLoading}
+                disabledDates={disabledDates}
+                id={listing.id}
+                currentUser={currentUser}
+              />
+            </div>
             <ListingInfo
               description={listing.description}
               host={listing.user}
@@ -125,7 +154,7 @@ const ListingClientSide: React.FC<ListingClientSideProps> = ({
               locationValue={listing.locationValue}
             />
           </div>
-          <div className="w-2/5">
+          <div className="hidden lg:block w-2/5">
             <ListingReservation
               price={listing.price}
               totalPrice={totalPrice}

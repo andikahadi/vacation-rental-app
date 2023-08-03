@@ -8,12 +8,12 @@ interface ListingImageProps {
 
 const ListingImage: React.FC<ListingImageProps> = ({ imageSrc }) => {
   return (
-    <div className="w-full h-full overflow-hidden">
+    <div className="w-full aspect-video overflow-hidden relative">
       <Image
         alt="Image"
         src={imageSrc}
-        width={500}
-        height={500}
+        layout="fill"
+        objectFit="cover"
         className="object-cover w-full"
       />
     </div>
