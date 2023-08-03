@@ -1,9 +1,7 @@
 import dynamic from "next/dynamic";
-import Image from "next/image";
 import getCurrentUser from "./actions/getCurrentUser";
 import getListings from "./actions/getListings";
 
-import Container from "./components/Container";
 import EmptyMessage from "./components/EmptyMessage";
 import ListingCard from "./components/listings/ListingCard";
 

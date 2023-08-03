@@ -5,17 +5,62 @@ import Image from "next/image";
 import FavoriteButton from "../FavoriteButton";
 import { Listing, Reservation, User } from "@prisma/client";
 import { useRouter } from "next/navigation";
+import useCities from "@/app/hooks/useCities";
+import { useMemo } from "react";
+import { format } from "date-fns";
 
 interface ListingCardProps {
   data: Listing;
   currentUser?: User | null;
   reservation?: Reservation;
+  disabled?: boolean;
+  actionId?: string;
   onAction?: (id: string) => void;
-  actionLabel: string;
+  actionLabel?: string;
 }
 
-const ListingCard: React.FC<ListingCardProps> = ({ data, currentUser }) => {
+const ListingCard: React.FC<ListingCardProps> = ({
+  data,
+  currentUser,
+  reservation,
+  disabled,
+  actionId = "",
+  onAction,
+  actionLabel,
+}) => {
   const router = useRouter();
+  const { getByName } = useCities();
+
+  const location = getByName(data.locationValue);
+
+  const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+
+    if (disabled) {
+      return;
+    }
+
+    onAction?.(actionId);
+  };
+
+  const price = useMemo(() => {
+    if (reservation) {
+      return reservation.totalPrice;
+    }
+    return data.price;
+  }, [reservation, data.price]);
+
+  const reservationDate = useMemo(() => {
+    if (!reservation) {
+      return null;
+    }
+
+    const start = new Date(reservation.startDate);
+    const end = new Date(reservation.endDate);
+
+    return `${format(start, "PP")} - ${format(end, "PP")}`;
+  }, [reservation]);
+
   return (
     <div
       onClick={() => router.push(`/listings/${data.id}`)}
@@ -105,7 +150,25 @@ const ListingCard: React.FC<ListingCardProps> = ({ data, currentUser }) => {
             <div className="mr-2">{data.bathroomCount} bathrooms</div>
           </div> */}
 
-          <div className="font-light text-sm">{data.locationValue}</div>
+          <div className="font-light text-sm">
+            {location?.label}, {location?.region}.
+          </div>
+
+          {reservationDate && (
+            <div className="font-light text-md lg:text-sm ">
+              {reservationDate}
+            </div>
+          )}
+          {onAction && actionLabel && (
+            <div className="pt-4">
+              <Button
+                disabled={disabled}
+                small
+                label={actionLabel}
+                onClick={handleCancel}
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>
