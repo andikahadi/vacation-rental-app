@@ -28,6 +28,10 @@ const UserSidebar = () => {
       </div>
       <div className="flex flex-col gap-3 ">
         <UserSidebarItem
+          label={"Favorites"}
+          onClick={() => router.push("/favorites")}
+        />
+        <UserSidebarItem
           label={"Trips"}
           onClick={() => router.push("/trips")}
         />
@@ -35,7 +39,10 @@ const UserSidebar = () => {
           label={"Host Reservation"}
           onClick={() => router.push("/hostreservations")}
         />
-        <UserSidebarItem label={"Favorites"} onClick={() => {}} />
+        <UserSidebarItem
+          label={"My Properties"}
+          onClick={() => router.push("/properties")}
+        />
       </div>
     </div>
   );

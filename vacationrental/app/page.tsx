@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 import getCurrentUser from "./actions/getCurrentUser";
-import getListings from "./actions/getListings";
+import getListings, { IListingParams } from "./actions/getListings";
 
 import EmptyMessage from "./components/EmptyMessage";
 import ListingCard from "./components/listings/ListingCard";
@@ -9,8 +9,13 @@ const Map = dynamic(() => import("./components/Map"), {
   ssr: false,
 });
 
-export default async function Home() {
-  const listings = await getListings();
+interface HomeProps {
+  searchParams: IListingParams;
+}
+
+export default async function Home({ searchParams }: HomeProps) {
+  console.log(searchParams);
+  const listings = await getListings(searchParams);
   const currentUser = await getCurrentUser();
   return (
     <div
