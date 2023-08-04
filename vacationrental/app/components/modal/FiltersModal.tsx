@@ -49,7 +49,7 @@ const FiltersModal = () => {
       locationCategory: locationCategory,
     };
 
-    if (params?.get("locationCategory") == "Any") {
+    if (updatedQuery.locationCategory.length == 0) {
       delete updatedQuery.locationCategory;
     }
 
@@ -79,7 +79,7 @@ const FiltersModal = () => {
               icon={item.icon}
               selected={locationCategory == item.label}
               onClick={(value: string) => {
-                if (value == locationCategory) setLocationCategory("Any");
+                if (value == locationCategory) setLocationCategory("");
                 else setLocationCategory(value as string);
               }}
             />
