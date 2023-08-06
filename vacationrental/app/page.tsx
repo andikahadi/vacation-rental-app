@@ -3,7 +3,9 @@ import getCurrentUser from "./actions/getCurrentUser";
 import getListings, { IListingParams } from "./actions/getListings";
 
 import EmptyMessage from "./components/EmptyMessage";
+import Heading from "./components/Heading";
 import ListingCard from "./components/listings/ListingCard";
+import useCities from "./hooks/useCities";
 
 const Map = dynamic(() => import("./components/Map"), {
   ssr: false,
@@ -17,6 +19,17 @@ export default async function Home({ searchParams }: HomeProps) {
   console.log(searchParams);
   const listings = await getListings(searchParams);
   const currentUser = await getCurrentUser();
+  const { getByName } = useCities();
+
+  const { locationValue } = searchParams;
+  let locationLabel = "";
+
+  if (locationValue) {
+    locationLabel = getByName(locationValue)?.label as string;
+  } else {
+    locationLabel = "Anywhere";
+  }
+
   return (
     <div
       className="
@@ -33,6 +46,7 @@ export default async function Home({ searchParams }: HomeProps) {
     >
       <div
         className="
+          pt-10
           h-full
           w-full
           md:w-1/2
@@ -48,6 +62,17 @@ export default async function Home({ searchParams }: HomeProps) {
           <EmptyMessage />
         ) : (
           <>
+            <div className="px-4 lg:px-8 py-4">
+              <Heading
+                title={locationLabel}
+                subtitle={
+                  listings.length +
+                  (listings.length == 1
+                    ? " home available"
+                    : " homes available")
+                }
+              />
+            </div>
             {listings.map((listing: any) => {
               return (
                 <div>

@@ -1,9 +1,46 @@
 "use client";
+import useCities from "@/app/hooks/useCities";
 import useSearchModal from "@/app/hooks/useSearchModal";
+import { useSearchParams } from "next/navigation";
 import { BiSearch } from "react-icons/bi";
+import { differenceInDays } from "date-fns";
 
 const Search = () => {
   const searchModal = useSearchModal();
+  const params = useSearchParams();
+  const { getByName } = useCities();
+
+  const locationValue = params?.get("locationValue");
+  const startDate = params?.get("startDate");
+  const endDate = params?.get("endDate");
+  const guestCount = params?.get("guestCount");
+  let locationLabel, durationLabel, guestLabel;
+
+  if (locationValue) {
+    locationLabel = getByName(locationValue as string)?.label;
+  } else {
+    locationLabel = "Add destination";
+  }
+
+  if (startDate && endDate) {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    let diff = differenceInDays(end, start);
+
+    if (diff == 0) {
+      diff = 1;
+    }
+    durationLabel = `${diff} Days`;
+  } else {
+    durationLabel = "Add dates";
+  }
+
+  if (guestCount) {
+    guestLabel = `${guestCount} Guests`;
+  } else {
+    guestLabel = "Add Guests";
+  }
+
   return (
     <div
       onClick={searchModal.onOpen}
@@ -26,7 +63,7 @@ const Search = () => {
 
           "
         >
-          Add destination
+          {locationLabel}
         </div>
         <div
           className="
@@ -40,7 +77,7 @@ const Search = () => {
 
           "
         >
-          Add dates
+          {durationLabel}
         </div>
         <div
           className="
@@ -55,7 +92,7 @@ const Search = () => {
             justify-between
           "
         >
-          <div> Add Guests</div>
+          <div>{guestLabel}</div>
           <div
             className="
               hidden
