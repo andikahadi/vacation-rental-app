@@ -2,6 +2,7 @@
 
 import useCities from "@/app/hooks/useCities";
 import { User } from "@prisma/client";
+import { LatLngBoundsExpression } from "leaflet";
 import dynamic from "next/dynamic";
 import { IconType } from "react-icons";
 import Avatar from "../navbar/Avatar";
@@ -23,6 +24,7 @@ interface ListingInfoProps {
     | undefined;
 
   locationValue: string;
+  addressCoord: number[];
 }
 
 // Add on : Amenities, VIP Services, Bedroom arrangement
@@ -32,6 +34,7 @@ const ListingInfo: React.FC<ListingInfoProps> = ({
   host,
   category,
   locationValue,
+  addressCoord,
 }) => {
   const { getByName } = useCities();
   const location = getByName(locationValue);
@@ -57,7 +60,7 @@ const ListingInfo: React.FC<ListingInfoProps> = ({
         <Avatar src={host?.image} />
       </div>
 
-      <Map center={location?.latlng} />
+      <Map center={addressCoord} />
     </div>
   );
 };

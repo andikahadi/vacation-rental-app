@@ -153,6 +153,7 @@ const ListingClientSide: React.FC<ListingClientSideProps> = ({
               host={listing.user}
               category={category}
               locationValue={listing.locationValue}
+              addressCoord={listing.addressCoord}
             />
           </div>
           <div className="hidden lg:block w-2/5">

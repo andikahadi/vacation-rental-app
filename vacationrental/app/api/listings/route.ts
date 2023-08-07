@@ -7,6 +7,8 @@ import Geocode from "react-geocode";
 
 export async function POST(request: Request) {
   const currentUser = await getCurrentUser();
+
+  //@ts-ignore
   Geocode.setApiKey(process.env.GEOCODING_API_KEY);
   Geocode.setLanguage("en");
   Geocode.setRegion("id");
