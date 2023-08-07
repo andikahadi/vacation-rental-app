@@ -34,6 +34,7 @@ const SeedsClientSide: React.FC<SeedsClientSideProps> = ({ currentUser }) => {
         latlng: [-8.739184, 115.171127],
       },
       price: "254",
+      address: [-8.6831, 115.1734],
     },
     {
       title: "Floating in the Lotus",
@@ -53,6 +54,7 @@ const SeedsClientSide: React.FC<SeedsClientSideProps> = ({ currentUser }) => {
         latlng: [-8.6478, 115.1385],
       },
       price: "758",
+      address: [-8.64743998211, 115.150090034655],
     },
   ];
 

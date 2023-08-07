@@ -2,11 +2,16 @@
 
 import { Reservation, User } from "@prisma/client";
 import axios from "axios";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import Heading from "../components/Heading";
 import ListingCard from "../components/listings/ListingCard";
+
+const Map = dynamic(() => import("../components/Map"), {
+  ssr: false,
+});
 
 interface TripsClientSideProps {
   reservations: Reservation[];
@@ -19,6 +24,8 @@ const TripsClientSide: React.FC<TripsClientSideProps> = ({
 }) => {
   const router = useRouter();
   const [deleteId, setDeleteId] = useState("");
+  const [hoverListingId, setHoverListingId] = useState("");
+  console.log("hoverlisting id:" + hoverListingId);
 
   const onCancel = (id: string) => {
     setDeleteId(id);
@@ -84,6 +91,12 @@ const TripsClientSide: React.FC<TripsClientSideProps> = ({
                 disabled={deleteId == reservation.id}
                 actionLabel="Cancel reservation"
                 currentUser={currentUser}
+                onMouseEnter={(value: string) => {
+                  setHoverListingId(value as string);
+                }}
+                onMouseLeave={() => {
+                  setHoverListingId("");
+                }}
               />
             );
           })}
@@ -98,7 +111,13 @@ const TripsClientSide: React.FC<TripsClientSideProps> = ({
           xl:w-full
           gap-8      
           bg-blue-400"
-      ></div>
+      >
+        <Map
+          large
+          reservations={reservations}
+          hoverListingId={hoverListingId}
+        />
+      </div>
     </div>
   );
 };

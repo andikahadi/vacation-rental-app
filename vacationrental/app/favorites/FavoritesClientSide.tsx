@@ -1,8 +1,14 @@
 "use client";
 
 import { Listing, User } from "@prisma/client";
+import dynamic from "next/dynamic";
+import { useState } from "react";
 import Heading from "../components/Heading";
 import ListingCard from "../components/listings/ListingCard";
+
+const Map = dynamic(() => import("../components/Map"), {
+  ssr: false,
+});
 
 interface FavoritesClientSideProps {
   currentUser: User | null;
@@ -13,6 +19,8 @@ const FavoritesClientSide: React.FC<FavoritesClientSideProps> = ({
   currentUser,
   favoriteListings,
 }) => {
+  const [hoverListingId, setHoverListingId] = useState("");
+  console.log("hoverlisting id:" + hoverListingId);
   return (
     <div
       className="
@@ -55,6 +63,12 @@ const FavoritesClientSide: React.FC<FavoritesClientSideProps> = ({
                 key={listing.id}
                 data={listing}
                 currentUser={currentUser}
+                onMouseEnter={(value: string) => {
+                  setHoverListingId(value as string);
+                }}
+                onMouseLeave={() => {
+                  setHoverListingId("");
+                }}
               />
             );
           })}
@@ -69,7 +83,13 @@ const FavoritesClientSide: React.FC<FavoritesClientSideProps> = ({
           xl:w-full
           gap-8      
           bg-blue-400"
-      ></div>
+      >
+        <Map
+          large
+          listings={favoriteListings}
+          hoverListingId={hoverListingId}
+        />
+      </div>
     </div>
   );
 };

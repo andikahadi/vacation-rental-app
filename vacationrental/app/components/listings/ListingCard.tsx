@@ -17,6 +17,8 @@ interface ListingCardProps {
   actionId?: string;
   onAction?: (id: string) => void;
   actionLabel?: string;
+  onMouseEnter: (value: string) => void;
+  onMouseLeave: () => void;
 }
 
 const ListingCard: React.FC<ListingCardProps> = ({
@@ -27,6 +29,8 @@ const ListingCard: React.FC<ListingCardProps> = ({
   actionId = "",
   onAction,
   actionLabel,
+  onMouseEnter,
+  onMouseLeave,
 }) => {
   const router = useRouter();
   const { getByName } = useCities();
@@ -64,6 +68,8 @@ const ListingCard: React.FC<ListingCardProps> = ({
   return (
     <div
       onClick={() => router.push(`/listings/${data.id}`)}
+      onMouseEnter={() => onMouseEnter(data.id)}
+      onMouseLeave={() => onMouseLeave()}
       className="
         px-4
         lg:px-8

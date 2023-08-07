@@ -95,7 +95,7 @@ export default async function Home({ searchParams }: HomeProps) {
           gap-8      
           bg-blue-400"
       >
-        <Map large />
+        <Map large listings={listings} />
       </div>
     </div>
   );
