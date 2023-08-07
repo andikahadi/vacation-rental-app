@@ -6,6 +6,7 @@ import { useState } from "react";
 import EmptyMessage from "./components/EmptyMessage";
 import Heading from "./components/Heading";
 import ListingCard from "./components/listings/ListingCard";
+import useCities from "./hooks/useCities";
 
 const Map = dynamic(() => import("./components/Map"), {
   ssr: false,
@@ -14,15 +15,24 @@ const Map = dynamic(() => import("./components/Map"), {
 interface HomeClientSideProps {
   currentUser: User | null;
   listings: Listing[];
-  locationLabel: string;
+  locationValue: string;
 }
 
 const HomeClientSide: React.FC<HomeClientSideProps> = ({
   currentUser,
   listings,
-  locationLabel,
+  locationValue,
 }) => {
   const [hoverListingId, setHoverListingId] = useState("");
+
+  const { getByName } = useCities();
+  let locationLabel = "";
+
+  if (locationValue) {
+    locationLabel = getByName(locationValue)?.label as string;
+  } else {
+    locationLabel = "Anywhere";
+  }
 
   return (
     <div
