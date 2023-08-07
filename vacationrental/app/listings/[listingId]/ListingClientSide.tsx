@@ -15,6 +15,7 @@ import useLoginModal from "@/app/hooks/useLoginModal";
 import { Listing, Reservation, User } from "@prisma/client";
 import axios from "axios";
 import toast from "react-hot-toast";
+import useCoord from "@/app/hooks/useCoord";
 
 const initialDateRange = {
   startDate: new Date(),
@@ -103,7 +104,6 @@ const ListingClientSide: React.FC<ListingClientSideProps> = ({
     return locationCategories.find((item) => item.label == listing.category);
   }, [listing.category]);
 
-  console.log(listing);
   return (
     <div className="w-screen">
       <div className="flex flex-col gap-6 w-full ">

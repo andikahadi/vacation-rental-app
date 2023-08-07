@@ -8,6 +8,7 @@ import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 import { Listing, Reservation } from "@prisma/client";
+import ListingMarker from "./listings/ListingMarker";
 
 //@ts-ignore
 delete L.Icon.Default.prototype._getIconUrl;
@@ -32,28 +33,11 @@ const Map: React.FC<MapProps> = ({
   listings,
   reservations,
 }) => {
-  // const markers = [
-  //   {
-  //     markerId: 1,
-  //     latlng: [-8.6831, 115.1734],
-  //     desc: "This is property 1",
-  //   },
-  //   {
-  //     markerId: 2,
-  //     latlng: [-8.64743998211, 115.150090034655],
-  //     desc: "This is property 2",
-  //   },
-  //   {
-  //     markerId: 3,
-  //     latlng: [-8.674995115, 115.156772053665],
-  //     desc: "This is property 3",
-  //   },
-  // ];
   let markers;
   if (listings) {
     markers = listings?.map((listing) => ({
       markerId: listing.id,
-      latlng: listing.address,
+      latlng: listing.addressCoord,
       imgSrc: listing.imageSrc1,
       title: listing.title,
       guestCount: listing.guestCount,
@@ -65,7 +49,7 @@ const Map: React.FC<MapProps> = ({
   if (reservations) {
     markers = reservations?.map((reservation: any) => ({
       markerId: reservation.listingId,
-      latlng: reservation.listing.address,
+      latlng: reservation.listing.addressCoord,
       imgSrc: reservation.listing.imageSrc1,
       title: reservation.listing.title,
       guestCount: reservation.listing.guestCount,
@@ -103,19 +87,26 @@ const Map: React.FC<MapProps> = ({
 
       {markers?.map((marker) => {
         return (
-          <Marker
-            key={marker.markerId}
-            position={marker.latlng as L.LatLngExpression}
-            icon={
-              hoverListingId == marker.markerId
-                ? customIconSelected(marker.price)
-                : customIcon(marker.price)
-            }
-          >
-            <Popup>
-              <div>{marker.title}</div>
-            </Popup>
-          </Marker>
+          <div key={marker.markerId}>
+            <Marker
+              position={marker.latlng as L.LatLngExpression}
+              icon={
+                hoverListingId == marker.markerId
+                  ? customIconSelected(marker.price)
+                  : customIcon(marker.price)
+              }
+            >
+              <Popup>
+                <ListingMarker
+                  id={marker.markerId}
+                  imgSrc={marker.imgSrc}
+                  title={marker.title}
+                  guestCount={marker.guestCount}
+                  roomCount={marker.roomCount}
+                />
+              </Popup>
+            </Marker>
+          </div>
         );
       })}
     </MapContainer>

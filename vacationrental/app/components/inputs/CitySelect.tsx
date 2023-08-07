@@ -20,7 +20,7 @@ const CitySelect: React.FC<CitySelectProps> = ({ value, onChange }) => {
   return (
     <div>
       <Select
-        placeholder="Anywhere"
+        placeholder="City"
         isClearable
         options={getAll()}
         value={value}

@@ -45,6 +45,7 @@ const RentModal = () => {
     defaultValues: {
       category: "",
       location: null,
+      address: "",
       guestCount: 1,
       roomCount: 1,
       bathroomCount: 1,
@@ -58,6 +59,7 @@ const RentModal = () => {
 
   const category = watch("category");
   const location = watch("location");
+  const address = watch("address");
   const guestCount = watch("guestCount");
   const roomCount = watch("roomCount");
   const bathroomCount = watch("bathroomCount");
@@ -159,10 +161,19 @@ const RentModal = () => {
           title="Where is your place located?"
           subtitle="Help guests find you!"
         />
+        <Input
+          id="address"
+          label="Address"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
         <CitySelect
           value={location}
           onChange={(value) => setCustomValue("location", value)}
         />
+
         <Map center={location?.latlng} />
       </div>
     );

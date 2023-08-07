@@ -62,7 +62,8 @@ model Listing {
   locationValue String
   userId String @db.ObjectId
   price Int
-  address Float[]
+  address String
+  addressCoord Float[]
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   reservations Reservation[]
