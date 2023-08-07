@@ -1,8 +1,8 @@
 import getCurrentUser from "./actions/getCurrentUser";
 import getListings, { IListingParams } from "./actions/getListings";
-
 import HomeClientSide from "./HomeClientSide";
 import useCities from "./hooks/useCities";
+export const dynamic = "force-dynamic";
 
 interface HomeProps {
   searchParams: IListingParams;
