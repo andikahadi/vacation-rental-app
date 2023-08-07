@@ -25,7 +25,6 @@ const TripsClientSide: React.FC<TripsClientSideProps> = ({
   const router = useRouter();
   const [deleteId, setDeleteId] = useState("");
   const [hoverListingId, setHoverListingId] = useState("");
-  console.log("hoverlisting id:" + hoverListingId);
 
   const onCancel = (id: string) => {
     setDeleteId(id);

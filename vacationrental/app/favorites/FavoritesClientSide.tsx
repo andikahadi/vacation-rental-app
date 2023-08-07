@@ -20,7 +20,7 @@ const FavoritesClientSide: React.FC<FavoritesClientSideProps> = ({
   favoriteListings,
 }) => {
   const [hoverListingId, setHoverListingId] = useState("");
-  console.log("hoverlisting id:" + hoverListingId);
+
   return (
     <div
       className="
