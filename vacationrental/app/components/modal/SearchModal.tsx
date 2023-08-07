@@ -36,13 +36,9 @@ const SearchModal = () => {
     key: "selection",
   });
 
-  const Map = useMemo(
-    () =>
-      dynamic(() => import("../Map"), {
-        ssr: false,
-      }),
-    []
-  );
+  const Map = dynamic(() => import("../Map"), {
+    ssr: false,
+  });
 
   const onNext = () => {
     setStep((value) => value + 1);
