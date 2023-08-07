@@ -48,7 +48,8 @@ const RentModal = () => {
       guestCount: 1,
       roomCount: 1,
       bathroomCount: 1,
-      imageSrc: "",
+      imageSrc1: "",
+      imageSrc2: "",
       price: 1,
       title: "",
       description: "",
@@ -60,7 +61,8 @@ const RentModal = () => {
   const guestCount = watch("guestCount");
   const roomCount = watch("roomCount");
   const bathroomCount = watch("bathroomCount");
-  const imageSrc = watch("imageSrc");
+  const imageSrc1 = watch("imageSrc1");
+  const imageSrc2 = watch("imageSrc2");
 
   const Map = useMemo(
     () => dynamic(() => import("../Map"), { ssr: false }),
@@ -199,8 +201,12 @@ const RentModal = () => {
       <div className="flex flex-col gap-8 w-full">
         <Heading title="Upload a picture of your place" />
         <ImageUpload
-          value={imageSrc}
-          onChange={(value) => setCustomValue("imageSrc", value)}
+          value={imageSrc1}
+          onChange={(value) => setCustomValue("imageSrc1", value)}
+        />
+        <ImageUpload
+          value={imageSrc2}
+          onChange={(value) => setCustomValue("imageSrc2", value)}
         />
       </div>
     );

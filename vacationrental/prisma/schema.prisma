@@ -52,7 +52,8 @@ model Listing {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   title String
   description String
-  imageSrc String
+  imageSrc1 String
+  imageSrc2 String
   createdAt DateTime @default(now())
   category String
   roomCount Int

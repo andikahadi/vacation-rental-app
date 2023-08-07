@@ -103,6 +103,7 @@ const ListingClientSide: React.FC<ListingClientSideProps> = ({
     return locationCategories.find((item) => item.label == listing.category);
   }, [listing.category]);
 
+  console.log(listing);
   return (
     <div className="w-screen">
       <div className="flex flex-col gap-6 w-full ">
@@ -119,10 +120,10 @@ const ListingClientSide: React.FC<ListingClientSideProps> = ({
             "
         >
           <div className="col-span-1">
-            <ListingImage imageSrc={listing.imageSrc} />
+            <ListingImage imageSrc={listing.imageSrc1} />
           </div>
           <div className="hidden xl:block col-span-1">
-            <ListingImage imageSrc={listing.imageSrc} />
+            <ListingImage imageSrc={listing.imageSrc2} />
           </div>
         </div>
         <div className="px-6 md:px-20 flex flex-row gap-14 ">

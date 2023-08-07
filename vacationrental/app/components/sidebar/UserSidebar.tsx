@@ -29,7 +29,9 @@ const UserSidebar = () => {
       <div className="flex flex-col gap-3 ">
         <UserSidebarItem
           label={"Favorites"}
-          onClick={() => router.push("/favorites")}
+          onClick={() => {
+            router.push("/favorites");
+          }}
         />
         <UserSidebarItem
           label={"Trips"}
