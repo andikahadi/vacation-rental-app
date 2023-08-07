@@ -15,7 +15,7 @@ const Map = dynamic(() => import("./components/Map"), {
 interface HomeClientSideProps {
   currentUser: User | null;
   listings: Listing[];
-  locationValue: string;
+  locationValue: string | undefined;
 }
 
 const HomeClientSide: React.FC<HomeClientSideProps> = ({
